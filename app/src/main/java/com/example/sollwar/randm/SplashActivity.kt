@@ -13,10 +13,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val intent = Intent(this, MainActivity::class.java)
-        lifecycleScope.launch {
-            delay(1000)
-            startActivity(intent)
-            finish()
-        }
+        startActivity(intent)
+        finish()
     }
 }
