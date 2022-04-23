@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">R and M</string>
+    <string name="species">Раса: %1$s</string>
+    <string name="gender">Пол: %1$s</string>
+    <string name="status">Статус: %1$s</string>
+    <string name="location_name">Последняя локация: %1$s</string>
+    <string name="episodes">Эпизодов: %1$s</string>
+</resources>

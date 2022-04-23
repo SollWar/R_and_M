@@ -1,6 +1,7 @@
-package com.example.sollwar.randm
+package com.example.sollwar.randm.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,16 +9,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sollwar.randm.MainViewModel
 import com.example.sollwar.randm.data.adapters.CharactersAdapter
+import com.example.sollwar.randm.data.model.Result
 import com.example.sollwar.randm.databinding.FragmentCharacterListBinding
+import com.example.sollwar.randm.navigator
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class CharacterListFragment : Fragment() {
+class CharacterListFragment : Fragment(), CharactersAdapter.OnCharacterListener {
 
     private var _binding: FragmentCharacterListBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var adapter: CharactersAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +30,7 @@ class CharacterListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCharacterListBinding.inflate(inflater, container, false)
-        val adapter = CharactersAdapter()
+        adapter = CharactersAdapter(this, requireContext())
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
 
@@ -42,6 +47,12 @@ class CharacterListFragment : Fragment() {
         }
     }
 
+    override fun onCharacterClick(result: Result) {
+        viewModel.character = result
+        navigator().characterSelect()
+        Log.d("onCharacterClick", result.name)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
@@ -52,4 +63,6 @@ class CharacterListFragment : Fragment() {
             return CharacterListFragment()
         }
     }
+
+
 }

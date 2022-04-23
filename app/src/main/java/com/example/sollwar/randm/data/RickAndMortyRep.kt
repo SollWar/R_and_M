@@ -1,5 +1,6 @@
 package com.example.sollwar.randm.data
 
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -10,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.flow.Flow
 
-class RickAndMortyRep {
+class RickAndMortyRep() {
     private val rickAndMortyApi = RickAndMortyApi.getInstance()
 
     fun getPageCharacters(): Flow<PagingData<Result>> {

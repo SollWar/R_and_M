@@ -1,5 +1,6 @@
 package com.example.sollwar.randm.data
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.sollwar.randm.data.model.CharacterList
@@ -11,6 +12,7 @@ class CharacterPagingSource(
     private val loader: CharacterPageLoader
 ) : PagingSource<Int, Result>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {
+        Log.d("pageIndex", params.key.toString())
         val pageIndex = params.key ?: 1
 
         return try {

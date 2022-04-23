@@ -3,8 +3,10 @@ package com.example.sollwar.randm
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.sollwar.randm.databinding.ActivityMainBinding
+import com.example.sollwar.randm.ui.CharacterFragment
+import com.example.sollwar.randm.ui.CharacterListFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Navigator {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -20,5 +22,13 @@ class MainActivity : AppCompatActivity() {
                 .add(binding.fragmentContainer.id, CharacterListFragment.newInstance())
                 .commit()
         }
+    }
+
+    override fun characterSelect() {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(binding.fragmentContainer.id, CharacterFragment.newInstance())
+            .addToBackStack(null)
+            .commit()
     }
 }

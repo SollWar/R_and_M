@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">R and M</string>
+    <string name="species">Species: %1$s</string>
+    <string name="gender">Gender: %1$s</string>
+    <string name="status">Status: %1$s</string>
+    <string name="location_name">Last location: %1$s</string>
+    <string name="episodes">Episodes: %1$s</string>
 </resources>
