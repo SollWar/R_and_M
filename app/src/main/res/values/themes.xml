@@ -21,4 +21,8 @@
         <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="navigationIcon">?attr/homeAsUpIndicator</item>
     </style>
+
+    <style name="Theme.RAndM.Launcher" parent="Theme.RAndM">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
 </resources>

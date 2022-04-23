@@ -35,6 +35,7 @@ class CharacterFragment : Fragment() {
         binding.locationName.text = getString(R.string.location_name, character.location.name)
         Picasso.get()
             .load(character.image)
+            .placeholder(R.drawable.big_placeholder)
             .into(binding.avatar)
 
         binding.toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }

@@ -46,6 +46,7 @@ class CharactersAdapter(
             binding.gender.text = context.getString(R.string.gender, this.result.gender)
             Picasso.get()
                 .load(this.result.image)
+                .placeholder(R.drawable.small_placeholder)
                 .into(binding.avatar)
         }
 
