@@ -27,6 +27,7 @@ class CharacterFragment : Fragment() {
         character = viewModel.character!!
 
         binding.name.text = character.name
+        binding.toolbar.title = character.name
         binding.species.text = getString(R.string.species, character.species)
         binding.gender.text = getString(R.string.gender, character.gender)
         binding.status.text = getString(R.string.status, character.status)
@@ -35,6 +36,8 @@ class CharacterFragment : Fragment() {
         Picasso.get()
             .load(character.image)
             .into(binding.avatar)
+
+        binding.toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
 
         return binding.root
     }

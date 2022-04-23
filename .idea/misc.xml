@@ -4,9 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Sollw/androidProject/RandM/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/Sollw/androidProject/RandM/app/src/main/res/layout/fragment_character.xml" value="0.25" />
+        <entry key="..\:/Users/Sollw/androidProject/RandM/app/src/main/res/layout/fragment_character.xml" value="0.33" />
         <entry key="..\:/Users/Sollw/androidProject/RandM/app/src/main/res/layout/fragment_character_list.xml" value="0.25" />
         <entry key="..\:/Users/Sollw/androidProject/RandM/app/src/main/res/layout/item_character_list.xml" value="0.33" />
+        <entry key="..\:/Users/Sollw/androidProject/RandM/app/src/main/res/layout/part_default_load_state.xml" value="0.25" />
       </map>
     </option>
   </component>

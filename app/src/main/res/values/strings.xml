@@ -5,4 +5,6 @@
     <string name="status">Status: %1$s</string>
     <string name="location_name">Last location: %1$s</string>
     <string name="episodes">Episodes: %1$s</string>
+    <string name="loading_error">Loading error</string>
+    <string name="repeat">Repeat</string>
 </resources>

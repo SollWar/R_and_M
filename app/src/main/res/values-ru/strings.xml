@@ -6,4 +6,6 @@
     <string name="status">Статус: %1$s</string>
     <string name="location_name">Последняя локация: %1$s</string>
     <string name="episodes">Эпизодов: %1$s</string>
+    <string name="loading_error">Ошибка загрузки</string>
+    <string name="repeat">Повторить</string>
 </resources>

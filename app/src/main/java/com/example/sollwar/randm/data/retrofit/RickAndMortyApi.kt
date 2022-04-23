@@ -1,6 +1,5 @@
 package com.example.sollwar.randm.data.retrofit
 
-import android.util.Log
 import com.example.sollwar.randm.data.model.CharacterList
 import retrofit2.Response
 import retrofit2.Retrofit

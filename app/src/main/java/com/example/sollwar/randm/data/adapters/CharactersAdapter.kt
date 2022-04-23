@@ -12,11 +12,8 @@ import com.example.sollwar.randm.data.model.Result
 import com.example.sollwar.randm.databinding.ItemCharacterListBinding
 import com.squareup.picasso.Picasso
 
-
-
 class CharactersAdapter(
-    private val onCharacterListener: OnCharacterListener,
-    private val context: Context
+    private val onCharacterListener: OnCharacterListener
 ) : PagingDataAdapter<Result, CharactersAdapter.Holder>(MovieDiffCallback()) {
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
@@ -27,7 +24,7 @@ class CharactersAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemCharacterListBinding.inflate(inflater, parent, false)
-        return Holder(binding, onCharacterListener, context)
+        return Holder(binding, onCharacterListener, parent.context)
     }
 
     class Holder(

@@ -11,6 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sollwar.randm.MainViewModel
 import com.example.sollwar.randm.data.adapters.CharactersAdapter
+import com.example.sollwar.randm.data.adapters.DefaultLoadStateAdapter
+import com.example.sollwar.randm.data.adapters.TryAgainAction
 import com.example.sollwar.randm.data.model.Result
 import com.example.sollwar.randm.databinding.FragmentCharacterListBinding
 import com.example.sollwar.randm.navigator
@@ -22,7 +24,7 @@ class CharacterListFragment : Fragment(), CharactersAdapter.OnCharacterListener 
     private var _binding: FragmentCharacterListBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainViewModel by activityViewModels()
-    private lateinit var adapter: CharactersAdapter
+    private lateinit var mainLoadStateHolder: DefaultLoadStateAdapter.Holder
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,11 +32,22 @@ class CharacterListFragment : Fragment(), CharactersAdapter.OnCharacterListener 
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCharacterListBinding.inflate(inflater, container, false)
-        adapter = CharactersAdapter(this, requireContext())
+        val adapter = CharactersAdapter(this)
+        val tryAgainAction: TryAgainAction = {adapter.retry()}
+        val footerAdapter = DefaultLoadStateAdapter(tryAgainAction)
+        val adapterWithLoadState = adapter.withLoadStateFooter(footerAdapter)
+
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapterWithLoadState
+
+
+        mainLoadStateHolder = DefaultLoadStateAdapter.Holder(
+            binding.loadStateView,
+            tryAgainAction
+        )
 
         observeCharacters(adapter)
+        observeLoadState(adapter)
 
         return binding.root
     }
@@ -43,6 +56,14 @@ class CharacterListFragment : Fragment(), CharactersAdapter.OnCharacterListener 
         lifecycleScope.launch {
             viewModel.charactersFlow.collectLatest { pagingData ->
                 adapter.submitData(pagingData)
+            }
+        }
+    }
+
+    private fun observeLoadState(adapter: CharactersAdapter) {
+        lifecycleScope.launch {
+            adapter.loadStateFlow.collectLatest { state ->
+                mainLoadStateHolder.bind(state.refresh)
             }
         }
     }
