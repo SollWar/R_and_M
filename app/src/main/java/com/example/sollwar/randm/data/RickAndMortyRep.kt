@@ -10,8 +10,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.flow.Flow
 
-class RickAndMortyRep() {
-    private val rickAndMortyApi = RickAndMortyApi.getInstance()
+class RickAndMortyRep(
+    private val rickAndMortyApi: RickAndMortyApi
+) {
 
     fun getPageCharacters(): Flow<PagingData<Result>> {
         val loader: CharacterPageLoader = { page ->

@@ -12,18 +12,4 @@ interface RickAndMortyApi {
     suspend fun getCharacterList(
         @Query("page") page: Int = 1
     ): Response<CharacterList>
-
-    companion object {
-        private var rickAndMortyApi: RickAndMortyApi? = null
-        fun getInstance(): RickAndMortyApi {
-            if (rickAndMortyApi == null) {
-                val retrofit = Retrofit.Builder()
-                    .baseUrl("https://rickandmortyapi.com/api/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                rickAndMortyApi = retrofit.create(RickAndMortyApi::class.java)
-            }
-            return rickAndMortyApi!!
-        }
-    }
 }

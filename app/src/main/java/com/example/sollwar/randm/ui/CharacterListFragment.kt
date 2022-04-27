@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sollwar.randm.MainViewModel
@@ -18,12 +17,13 @@ import com.example.sollwar.randm.databinding.FragmentCharacterListBinding
 import com.example.sollwar.randm.navigator
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CharacterListFragment : Fragment(), CharactersAdapter.OnCharacterListener {
 
     private var _binding: FragmentCharacterListBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: MainViewModel by activityViewModels()
+    private val vm by sharedViewModel<MainViewModel>()
     private lateinit var mainLoadStateHolder: DefaultLoadStateAdapter.Holder
 
     override fun onCreateView(
@@ -54,7 +54,7 @@ class CharacterListFragment : Fragment(), CharactersAdapter.OnCharacterListener 
 
     private fun observeCharacters(adapter: CharactersAdapter) {
         lifecycleScope.launch {
-            viewModel.charactersFlow.collectLatest { pagingData ->
+            vm.charactersFlow.collectLatest { pagingData ->
                 adapter.submitData(pagingData)
             }
         }
@@ -69,7 +69,7 @@ class CharacterListFragment : Fragment(), CharactersAdapter.OnCharacterListener 
     }
 
     override fun onCharacterClick(result: Result) {
-        viewModel.character = result
+        vm.character = result
         navigator().characterSelect()
         Log.d("onCharacterClick", result.name)
     }

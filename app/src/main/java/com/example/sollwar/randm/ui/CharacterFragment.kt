@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.example.sollwar.randm.MainViewModel
 import com.example.sollwar.randm.R
 import com.example.sollwar.randm.data.model.Result
 import com.example.sollwar.randm.databinding.FragmentCharacterBinding
 import com.squareup.picasso.Picasso
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CharacterFragment : Fragment() {
     private var _binding: FragmentCharacterBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: MainViewModel by activityViewModels()
+    private val vm by sharedViewModel<MainViewModel>()
     private lateinit var character: Result
 
     override fun onCreateView(
@@ -24,7 +24,7 @@ class CharacterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCharacterBinding.inflate(inflater, container, false)
-        character = viewModel.character!!
+        character = vm.character!!
 
         binding.name.text = character.name
         binding.toolbar.title = character.name
